@@ -14,7 +14,7 @@ y_train = train['age_group']
 test = pd.read_csv('Test_Data.csv')
 X_test = test.drop(columns=['SEQN'])
 
-# Choose classifier: balanced-class RF or balanced random forest
+# Choose classifier: RF or balanced random forest
 clf = RandomForestClassifier(
     n_estimators=10,
     max_depth=5,
@@ -41,6 +41,6 @@ pipeline.fit(X_train, y_train)
 preds = pipeline.predict(X_test)
 print("Test predictions distribution:", pd.Series(preds).value_counts())
 
-# Save submission
+# Save submission as a CSV file
 pd.DataFrame({'age_group': preds.astype(int)}).to_csv(
     'submission.csv', index=False)
